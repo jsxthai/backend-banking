@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 7777;
 
 // connect mongodb
-const mongoDBUrl = process.env.MONGODB_URL || 'mongodb://localhost/backend-banking'
+const mongoDBUrl = process.env.MONGODB_URL || 'mongodb://localhost/backend-banking';
 try {
     mongoose.connect(mongoDBUrl, {
         useNewUrlParser: true,
