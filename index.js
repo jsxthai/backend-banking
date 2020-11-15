@@ -27,7 +27,7 @@ app.use(morgan('tiny'));
 app.use('/api/users', users)
 
 app.get('/', (req, res) => {
-    res.send('hello, i am api banking');
+    res.json('hello, i am api banking');
 })
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
