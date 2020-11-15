@@ -6,11 +6,14 @@ const userSchema = mongoose.Schema({
     emai: String,
     phone: String,
     fullname: String,
-    accountNumber: String,
+    accountNumber: {
+        type: String,
+        default: Math.floor(Date.now() / 1000)
+    },
     savingsAccount: [String],
     createAt: {
         type: Date,
-        default: Date.now
+        default: Date.now()
     },
     type: String,
     balance: Number
