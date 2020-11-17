@@ -92,15 +92,16 @@ export const payIn = async (req, res) => {
     try {
         await User.findOne({ accountNumber: req.params.accountNumber }, (err, users) => {
             if (err) return res.status(400).json({ msg: 'err server- pay in', err })
-            // payin
-            User.updateOne({ accountNumber: req.params.accountNumber }, { balance: (users.balance || 0) + req.body.balance }, (err) => {
-                if (err) return res.status(400).send({ msg: 'upd', err })
-                return res.json({
-                    msg: 'updated user',
-                    accountNumber: req.params.accountNumber,
-                    balance: req.body.balance,
+            if (!users) return res.status(400).json({ msg: 'user not found', err })
+            const balance = users.balance || 0;
+            User.updateOne({ accountNumber: req.params.accountNumber },
+                { balance: balance + req.body.balance }, (err, msg) => {
+                    if (err) return res.status(400).send({ msg: 'upd', err })
+                    return res.json({
+                        status: 'update ok',
+                        msg
+                    })
                 })
-            })
         })
     } catch (err) {
         console.log({ msg: 'err server- pay in', err })
