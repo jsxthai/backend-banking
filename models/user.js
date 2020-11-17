@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     fullname: String,
     accountNumber: {
         type: String,
-        default: Math.floor(Date.now() / 1000)
+        default: Date.now()
     },
     savingsAccount: [String],
     createAt: {

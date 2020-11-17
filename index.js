@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import users from './routers/users.js';
+import login from './routers/login.js'
 import cors from 'cors';
 
 dotenv.config();
@@ -26,7 +27,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('tiny'));
 // use router
-app.use('/api/users', users)
+app.use('/api/users', users);
+// app.use('/api/login', login);
 
 app.get('/', (req, res) => {
     res.json('hello, i am api banking');
