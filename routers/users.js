@@ -4,7 +4,8 @@ import {
     createUser,
     updateUser,
     deleteUser,
-    fetchUsersWithId
+    fetchUsersWithId,
+    payIn
 } from '../controllers/users.js'
 
 const router = express.Router();
@@ -12,7 +13,8 @@ const router = express.Router();
 router.get('/', fetchUsers);
 router.get('/:userId', fetchUsersWithId);
 router.post('/', createUser);
-router.put('/:userId', updateUser);
+// router.put('/:userId', updateUser);
+router.put('/:accountNumber', payIn);
 router.delete('/:userId', deleteUser);
 
 export default router;

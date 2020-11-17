@@ -45,7 +45,6 @@ export const updateUser = async (req, res) => {
                 })
             })
         })
-
     } catch (error) {
         console.log(error)
     }
@@ -83,5 +82,27 @@ export const fetchUsersWithId = async (req, res) => {
         })
     } catch (err) {
         console.log(err)
+    }
+}
+
+export const payIn = async (req, res) => {
+    if (!req.params.accountNumber) return res.status(400).json({
+        msg: 'not found account number'
+    })
+    try {
+        await User.findOne({ accountNumber: req.params.accountNumber }, (err, users) => {
+            if (err) return res.status(400).json({ msg: 'err server- pay in', err })
+            // payin
+            User.updateOne({ accountNumber: req.params.accountNumber }, { balance: (users.balance || 0) + req.body.balance }, (err) => {
+                if (err) return res.status(400).send({ msg: 'upd', err })
+                return res.json({
+                    msg: 'updated user',
+                    accountNumber: req.params.accountNumber,
+                    balance: req.body.balance,
+                })
+            })
+        })
+    } catch (err) {
+        console.log({ msg: 'err server- pay in', err })
     }
 }
