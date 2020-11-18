@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import users from './routers/users.js';
 import login from './routers/login.js'
+import totalUser from './routers/totalUser.js'
+import accounts from './routers/accounts.js'
+
 import cors from 'cors';
 
 dotenv.config();
@@ -28,6 +31,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan('tiny'));
 // use router
 app.use('/api/users', users);
+app.use('/api/accounts', accounts);
+app.use('/api/total-user', totalUser);
 // app.use('/api/login', login);
 
 app.get('/', (req, res) => {
