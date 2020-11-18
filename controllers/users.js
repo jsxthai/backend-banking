@@ -21,10 +21,33 @@ export const createUser = async (req, res) => {
     const userData = req.body;
     const userNew = {
         ...userData,
-        accountNumber: rand()
+        accountNumber: rand(),
+        createAt: Date.now(),
+        transfer: []
     }
+
+    userNew.transfer.push({
+        to: "4585654785",
+        money: 55555,
+        date: "2020-11-18T09:28:04.294Z",
+        type: "reminder",
+        details: "Chuyen tien no"
+    })
+
+    console.log(userNew)
     try {
         const user = await new User(userNew);
+        console.log('createa user', user)
+
+        // user.transfer.push({
+        //     to: "4585654785",
+        //     money: 55555,
+        //     date: "2020-11-18T09:28:04.294Z",
+        //     type: "reminder",
+        //     details: "Chuyen tien no"
+        // })
+
+
         await user.save((err) => {
             if (err) return res.status(400).json(err)
             return res.json({

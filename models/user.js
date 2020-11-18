@@ -6,17 +6,27 @@ const userSchema = mongoose.Schema({
     email: String,
     phone: String,
     fullname: String,
-    accountNumber: {
-        type: String,
-    },
+    accountNumber: String,
     savingsAccount: [String],
-    createAt: {
-        type: Date,
-        default: Date.now()
-    },
+    createAt: String,
     type: String,
-    balance: Number
-})
+    balance: Number,
+    transfer: [{
+        to: String,
+        money: Number,
+        createAt: String,
+        type: String,
+        details: String,
+    }],
+    receive: [{
+        from: String,
+        money: Number,
+        createAt: String,
+        details: String,
+    }],
+}, { typeKey: '$type' }
+
+)
 
 
 const User = mongoose.model('user', userSchema);
