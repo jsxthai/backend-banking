@@ -8,7 +8,6 @@ const userSchema = mongoose.Schema({
     fullname: String,
     accountNumber: {
         type: String,
-        default: rand()
     },
     savingsAccount: [String],
     createAt: {
@@ -19,10 +18,6 @@ const userSchema = mongoose.Schema({
     balance: Number
 })
 
-function rand(min = 1000000000, max = 9999999999) {
-    let randomNum = Math.random() * (max - min) + min;
-    return Math.round(randomNum);
-}
 
 const User = mongoose.model('user', userSchema);
 

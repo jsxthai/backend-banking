@@ -2,7 +2,7 @@ import User from '../models/user.js';
 
 export const fetchUsers = (req, res) => {
     try {
-        User.find({}, (err, users) => {
+        User.find({}, { password: 0 }, (err, users) => {
             if (err) return res.status(400).json(err)
             return res.json(users);
         })
@@ -11,10 +11,20 @@ export const fetchUsers = (req, res) => {
     }
 }
 
+
+function rand(min = 1000000000, max = 9999999999) {
+    let randomNum = Math.random() * (max - min) + min;
+    return Math.round(randomNum);
+}
+
 export const createUser = async (req, res) => {
     const userData = req.body;
+    const userNew = {
+        ...userData,
+        accountNumber: rand()
+    }
     try {
-        const user = await new User(userData);
+        const user = await new User(userNew);
         await user.save((err) => {
             if (err) return res.status(400).json(err)
             return res.json({
