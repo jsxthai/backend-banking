@@ -14,19 +14,17 @@ const userSchema = mongoose.Schema({
     transfer: [{
         to: String,
         money: Number,
-        createAt: String,
+        date: String,
         type: String,
         details: String,
     }],
     receive: [{
         from: String,
         money: Number,
-        createAt: String,
+        date: String,
         details: String,
     }],
-}, { typeKey: '$type' }
-
-)
+}, { typeKey: '$type' })
 
 
 const User = mongoose.model('user', userSchema);

@@ -18,36 +18,22 @@ function rand(min = 1000000000, max = 9999999999) {
 }
 
 export const createUser = async (req, res) => {
-    const userData = req.body;
+    let data = req.body;
     const userNew = {
-        ...userData,
-        accountNumber: rand(),
+        ...data,
+        accountNumber: Date.now(),
         createAt: Date.now(),
-        transfer: []
     }
+    //set date 
+    // for (let i in data.transfer) {
+    //     data.transfer[i].date = Date.now()
+    // }
+    // for (let i in data.receive) {
+    //     data.receive[i].date = Date.now()
+    // }
 
-    userNew.transfer.push({
-        to: "4585654785",
-        money: 55555,
-        date: "2020-11-18T09:28:04.294Z",
-        type: "reminder",
-        details: "Chuyen tien no"
-    })
-
-    console.log(userNew)
     try {
         const user = await new User(userNew);
-        console.log('createa user', user)
-
-        // user.transfer.push({
-        //     to: "4585654785",
-        //     money: 55555,
-        //     date: "2020-11-18T09:28:04.294Z",
-        //     type: "reminder",
-        //     details: "Chuyen tien no"
-        // })
-
-
         await user.save((err) => {
             if (err) return res.status(400).json(err)
             return res.json({
