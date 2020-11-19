@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
     accountNumber: String,
     savingsAccount: [String],
     createAt: String,
-    type: String,
+    role: { $type: String, default: 'user' },
     balance: Number,
     transfer: [{
         to: String,
