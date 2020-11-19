@@ -5,37 +5,33 @@ import jwt from 'jsonwebtoken';
 
 
 export const authAccount = async (req, res) => {
-    // console.log(req.header('Test-Header')); // test get
-
-    const loginData = req.body;
-    console.log(loginData)
-    const { username, password } = loginData;
+    const { username, password } = req.body;
+    // check from client
     if (!username || !password) return res.status(400).json({
         msg: 'The login details are incorrect. Try again.'
     })
 
     // check username in db
-    await User.findOne({ username }, (err, user) => {
+    await User.findOne({ username }, async (err, user) => {
         if (err || !user) return res.status(400).json({ msg: 'not found username', err });
-        // login when no hash @@
-        if (user.password === password) {
-            // correct
-            const payload = {
-                accountNumber: user.accountNumber,
-                role: 'user'
-            }
-            const token = jwt.sign(payload, process.env.SECRET);
+        // checking password is correct
+        const validPass = await bcrypt.compare(password, user.password);
+        // console.log(password, '-----', user.password)
+        // if not correct: false
+        if (!validPass) return res.status(400).send('Invalid password');
 
-            return res.json({
-                msg: 'login successed',
-                token
-            })
+        // correct
+        const payload = {
+            accountNumber: user.accountNumber,
+            role: 'user'
         }
-        else {
-            res.status(400).json({
-                msg: 'password is incorrect',
-            });
-        }
+        const token = jwt.sign(payload, process.env.SECRET);
+
+        return res.json({
+            msg: 'login successed',
+            token
+        })
+
     })
 }
 
