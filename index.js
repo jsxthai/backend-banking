@@ -1,39 +1,36 @@
 import express from 'express';
 import morgan from 'morgan';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import users from './routers/users.js';
+import connectDB from './config/db.js';
+import cors from 'cors';
 import login from './routers/login.js'
 import totalUser from './routers/totalUser.js'
 import accounts from './routers/accounts.js'
 
-import cors from 'cors';
-
+// config
 dotenv.config();
+// conncet mongodb
+connectDB();
+
 const app = express();
 const port = process.env.PORT || 7777;
-
-// connect mongodb
-const mongoDBUrl = process.env.MONGODB_URL || 'mongodb://localhost/backend-banking';
-try {
-    mongoose.connect(mongoDBUrl, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }, () => console.log("mongodb connected"));
-} catch (error) {
-    console.log("mongodb could not connect");
-}
 
 // app use
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(morgan('tiny'));
+
+// logging
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
+
 // use router
 app.use('/api/users', users);
 app.use('/api/accounts', accounts);
 app.use('/api/total-user', totalUser);
-// app.use('/api/login', login);
+app.use('/api/login', login);
 
 app.get('/', (req, res) => {
     res.json('hello, i am api banking');
