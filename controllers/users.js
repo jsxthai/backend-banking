@@ -1,4 +1,5 @@
 import User from '../models/user.js';
+import bcrypt from 'bcryptjs';
 
 export const fetchUsers = (req, res) => {
     try {
@@ -19,19 +20,17 @@ function rand(min = 1000000000, max = 9999999999) {
 
 export const createUser = async (req, res) => {
     let data = req.body;
+    // hash passwords
+    const salt = await bcrypt.genSalt(10);
+    data.password = await bcrypt.hash(data.password, salt);
+
+    // default Date.now in schema is duplicate date : test in loacal 
+    // fix:
     const userNew = {
         ...data,
-        accountNumber: Date.now(),
-        createAt: Date.now(),
+        accountNumber: Date.now(), //
+        createAt: Date.now(), //
     }
-    //set date 
-    // for (let i in data.transfer) {
-    //     data.transfer[i].date = Date.now()
-    // }
-    // for (let i in data.receive) {
-    //     data.receive[i].date = Date.now()
-    // }
-
     try {
         const user = await new User(userNew);
         await user.save((err) => {
