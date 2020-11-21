@@ -1,8 +1,11 @@
 import User from '../models/user.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
-
+import fs from 'fs';
+import path from 'path';
+const __dirname = path.resolve();
+const PRIVATE_KEY = fs.readFileSync(path.resolve(__dirname, 'backend-banking',"../key/privateKey.pem"), "utf-8");
+// console.log(PRIVATE_KEY)
 
 export const authAccount = async (req, res) => {
     const { username, password } = req.body;
@@ -25,8 +28,14 @@ export const authAccount = async (req, res) => {
             accountNumber: user.accountNumber,
             role: 'user'
         }
+        const options = {
+            expiresIn: '1h',
+            issuer: 'Thai ZZZ',
+            algorithm: 'RS256'
+        }
         // sign jwt
-        const token = jwt.sign(payload, process.env.PRIVATE_KEY);
+
+        const token = jwt.sign(payload, PRIVATE_KEY, options);
 
         return res.json({
             msg: 'login successed',

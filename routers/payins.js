@@ -2,8 +2,16 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 import Transaction from "../models/transaction.js";
+import fs from 'fs';
+import path from 'path';
+const __dirname = path.resolve();
 
 const route = express.Router();
+
+// const PRIVATE_KEY = fs.readFileSync(path.resolve(__dirname, 'backend-banking',"../key/privateKey.pem"), "utf-8");
+const PUBLIC_KEY = fs.readFileSync(path.resolve(__dirname, 'backend-banking',"../key/publicKey.pem"), "utf-8");
+// console.log(PRIVATE_KEY)
+// console.log(PUBLIC_KEY)
 
 // route payin a user
 // POST .../api/payin
@@ -17,7 +25,7 @@ route.put("/", (req, res) => {
   // .....later
 
   // validate token = publicKey
-  jwt.verify(jwtToken, process.env.PUBLIC_KEY, (err, payload) => {
+  jwt.verify(jwtToken, PUBLIC_KEY, (err, payload) => {
     if (err) return res.status(401).json({ msg: "sign khong hop le" });
     else {
       // find user with payload.accountNumber
@@ -29,8 +37,8 @@ route.put("/", (req, res) => {
           accountSource: accountNumber,
           accountDest: accountNumber,
           mount: mount,
-          sign: jwtToken.split(".")[2],
-          date: Date.now,
+          sign: jwtToken,
+          date: Date.now(),
           detail: "payin me",
           typeTrans: "payin",
         });
