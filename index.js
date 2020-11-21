@@ -7,6 +7,7 @@ import cors from 'cors';
 import login from './routers/login.js'
 import totalUser from './routers/totalUser.js'
 import accounts from './routers/accounts.js'
+import payins from './routers/payins.js'
 
 // config
 dotenv.config();
@@ -31,6 +32,7 @@ app.use('/api/users', users);
 app.use('/api/accounts', accounts);
 app.use('/api/total-user', totalUser);
 app.use('/api/login', login);
+app.use('/api/payins', payins);
 
 app.get('/', (req, res) => {
     res.json('hello, i am api banking');

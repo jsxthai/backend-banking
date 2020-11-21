@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 
 export const fetchUsers = (req, res) => {
     try {
-        User.find({}, { password: 0 }, (err, users) => {
+        User.find({}, { password: 0, _id: 0 }, (err, users) => {
             if (err) return res.status(400).json(err)
             return res.json(users);
         })

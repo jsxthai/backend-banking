@@ -14,7 +14,7 @@ router.get('/', fetchUsers);
 router.get('/:userId', fetchUsersWithId);
 router.post('/', createUser);
 // router.put('/:userId', updateUser);
-router.put('/:accountNumber', payIn);
+// router.put('/:accountNumber', payIn);
 router.delete('/:userId', deleteUser);
 
 
