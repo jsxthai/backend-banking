@@ -41,7 +41,7 @@ route.put("/", (req, res) => {
           // if err -> handle rollback user, trans .... later
           User.updateOne(
             { accountNumber: accountNumber },
-            { balance: user.balance + mount },
+            { balance:( user.balance || 0) + mount },
             (err, resultUpd) => {
                 if(err) return res.status(400).json({ msg: "err update balance user, (rollback transaction pre)" });
                 return res.json({msg: 'all payin sucess', resultUpd})
