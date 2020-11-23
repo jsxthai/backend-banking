@@ -19,7 +19,7 @@ export const historyTrans = async (req, res) => {
             .json({ msg: "Account no have transaction, check again" });
         return res.status(200).json({ msg: "Find transaction success", trans });
       }
-    );
+    ).sort({ date: -1 });
   } catch (error) {
     console.log(error);
     return;
