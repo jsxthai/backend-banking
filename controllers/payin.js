@@ -6,10 +6,11 @@ import path from "path";
 const __dirname = path.resolve();
 
 const PUBLIC_KEY =
+  process.env.PUBLIC_KEY ||
   fs.readFileSync(
     path.resolve(__dirname, "backend-banking", "../key/publicKey.pem"),
     "utf-8"
-  ) || process.env.PUBLIC_KEY;
+  );
 
 export const payin = (req, res) => {
   const jwtToken = req.headers.authorization.split(" ")[1];

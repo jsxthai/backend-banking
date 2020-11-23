@@ -5,10 +5,11 @@ import fs from "fs";
 import path from "path";
 const __dirname = path.resolve();
 const PRIVATE_KEY =
+  process.env.PRIVATE_KEY ||
   fs.readFileSync(
     path.resolve(__dirname, "backend-banking", "../key/privateKey.pem"),
     "utf-8"
-  ) || process.env.PRIVATE_KEY;
+  );
 // console.log(PRIVATE_KEY)
 
 export const authAccount = async (req, res) => {
