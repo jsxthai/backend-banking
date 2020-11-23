@@ -4,4 +4,6 @@ node_modules
 
 *.log
 
-/key
+key
+key/privateKey.pem
+key/publicKey.pem
