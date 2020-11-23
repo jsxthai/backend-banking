@@ -13,7 +13,7 @@ const PUBLIC_KEY =
 
 export const payin = (req, res) => {
   const jwtToken = req.headers.authorization.split(" ")[1];
-  const { mount, accountNumber, typeTrans } = req.body;
+  const { mount, accountNumber, typeTrans, detail } = req.body;
 
   // check token
   if (!jwtToken) return res.status(401).json({ msg: "no token" });
@@ -36,7 +36,7 @@ export const payin = (req, res) => {
           mount: mount,
           sign: jwtToken,
           date: Date.now(),
-          detail: "payin",
+          detail: detail || "no comment",
           typeTrans: typeTrans || "receive",
         });
         transRow.save((err) => {
