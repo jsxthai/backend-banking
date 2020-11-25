@@ -9,6 +9,7 @@ import totalUser from "./routers/totalUser.js";
 import accounts from "./routers/accounts.js";
 import payins from "./routers/payins.js";
 import history from "./routers/historyTrans.js";
+import authRecaptcha from "./routers/auth-reacptcha.js";
 
 // config
 dotenv.config();
@@ -25,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // logging
 if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
+    app.use(morgan("dev"));
 }
 
 // use router
@@ -35,9 +36,10 @@ app.use("/api/total-user", totalUser);
 app.use("/api/login", login);
 app.use("/api/payins", payins);
 app.use("/api/history", history);
+app.use("/api/auth-recaptcha", authRecaptcha);
 
 app.get("/", (req, res) => {
-  res.json("hello, i am api banking");
+    res.json("hello, i am api banking");
 });
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
