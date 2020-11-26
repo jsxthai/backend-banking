@@ -1,20 +1,22 @@
 import User from "../models/user.js";
-import { validateHuman } from "../helper/validateRecaptcha.js";
 import bcrypt from "bcryptjs";
-import { createAccessToken } from "../helper/createAccessToken.js";
+import { validateHuman } from "../helpers/validateRecaptcha.js";
+import { createAccessToken } from "../helpers/createAccessToken.js";
 
 const authRecaptcha = async (req, res) => {
+    console.log("payload", req.payload);
+    // console.log("cookie", req.cookies);
+    // console.log(loginData);
     const { recaptchaToken, loginData } = req.body;
     const { username, password } = loginData;
 
     // basic validate
     if (!recaptchaToken)
-        return res.status(400).json({ msg: "recaptcha token not found" });
+        return res.status(401).json({ msg: "recaptcha token not found" });
     if (!username || !password)
         return res
-            .status(400)
+            .status(401)
             .json({ msg: "username or password is null or empty" });
-    console.log(loginData);
 
     // validate is human with gg
     const human = await validateHuman(recaptchaToken);

@@ -1,8 +1,9 @@
 import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import users from "./routers/users.js";
-import connectDB from "./config/db.js";
+import connectDB from "./configs/db.js";
 import cors from "cors";
 import login from "./routers/login.js";
 import totalUser from "./routers/totalUser.js";
@@ -20,9 +21,11 @@ const app = express();
 const port = process.env.PORT || 7777;
 
 // app use
-app.use(cors());
+// app.use(cors()); // or line below
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // logging
 if (process.env.NODE_ENV === "development") {
