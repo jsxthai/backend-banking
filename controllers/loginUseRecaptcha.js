@@ -41,11 +41,15 @@ const authRecaptcha = async (req, res) => {
                         accountNumber: user.accountNumber,
                         username: user.username,
                         email: user.email,
+                        role: user.role,
                     };
                     const accessToken = createAccessToken(payload);
                     return res.json({
                         msg: "login success",
                         accessToken,
+                        role: user.role, // role đặt ở đây bên client ko cần decode payload để lấy,
+                        // nên đặt trong payload(token) vì sau đăng nhập sẽ dùng token để request data,
+                        // check role trong đó luôn
                     });
                 }
                 return res.status(401).json({ msg: "password incorrect" });

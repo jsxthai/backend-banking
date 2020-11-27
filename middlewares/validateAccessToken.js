@@ -16,8 +16,12 @@ const validateAccessToken = (req, res, next) => {
 
     jwt.verify(accessToken, publicKey, (err, payload) => {
         if (err) {
+            // xu ly bang refresh token .....// note
+            // cấp lại token mới luôn cho user hoặc bắt user đăng nhập lại
+            // cấp mới: - dùng refresh token lưu ở database của user đó,
+            // refresh token nếu lưu ở user thì user sử dụng send request để cấp mới accesstoken
             if (err instanceof TokenExpiredError) {
-                console.log("token is exprired"); // xu ly bang refresh token .....// note
+                console.log("token is exprired");
                 return res.status(401).json({ msg: "token is exprired", err });
             }
             return res
