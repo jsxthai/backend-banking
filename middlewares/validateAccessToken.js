@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+const { TokenExpiredError } = jwt;
 
 const validateAccessToken = (req, res, next) => {
     const { accessToken } = req.cookies;
@@ -6,6 +7,7 @@ const validateAccessToken = (req, res, next) => {
         return res.status(401).json({ msg: "not found access token" });
     }
 
+    // console.log("acc:", accessToken);
     const publicKey = process.env.PUBLIC_KEY || pK;
     if (!publicKey) {
         console.log("public key is null");
@@ -13,8 +15,15 @@ const validateAccessToken = (req, res, next) => {
     }
 
     jwt.verify(accessToken, publicKey, (err, payload) => {
-        if (err)
-            return res.status(401).json({ msg: "server not auth now", err });
+        if (err) {
+            if (err instanceof TokenExpiredError) {
+                console.log("token is exprired"); // xu ly bang refresh token .....// note
+                return res.status(401).json({ msg: "token is exprired", err });
+            }
+            return res
+                .status(401)
+                .json({ msg: "server not verify token", err });
+        }
         // is payload
         req.payload = payload;
         next();

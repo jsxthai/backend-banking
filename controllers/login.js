@@ -12,6 +12,7 @@ const PRIVATE_KEY =
     );
 // console.log(PRIVATE_KEY)
 
+// login basic username and password //
 export const authAccount = async (req, res) => {
     const { username, password } = req.body;
     // check from client

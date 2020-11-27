@@ -10,7 +10,8 @@ import totalUser from "./routers/totalUser.js";
 import accounts from "./routers/accounts.js";
 import payins from "./routers/payins.js";
 import history from "./routers/historyTrans.js";
-import authRecaptcha from "./routers/auth-reacptcha.js";
+import authRecaptcha from "./routers/loginUseRecaptcha.js";
+import loginUseJWT from "./routers/loginUseJWT.js";
 
 // config
 dotenv.config();
@@ -39,7 +40,8 @@ app.use("/api/total-user", totalUser);
 app.use("/api/login", login);
 app.use("/api/payins", payins);
 app.use("/api/history", history);
-app.use("/api/auth-recaptcha", authRecaptcha);
+app.use("/api/login-recaptcha", authRecaptcha);
+app.use("/api/login-use-jwt", loginUseJWT);
 
 app.get("/", (req, res) => {
     res.json("hello, i am api banking");

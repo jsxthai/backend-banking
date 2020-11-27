@@ -4,7 +4,7 @@ import { validateHuman } from "../helpers/validateRecaptcha.js";
 import { createAccessToken } from "../helpers/createAccessToken.js";
 
 const authRecaptcha = async (req, res) => {
-    console.log("payload", req.payload);
+    // console.log("payload", req.payload);
     // console.log("cookie", req.cookies);
     // console.log(loginData);
     const { recaptchaToken, loginData } = req.body;
