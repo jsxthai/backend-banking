@@ -13,6 +13,7 @@ import history from "./routers/historyTrans.js";
 import authRecaptcha from "./routers/loginUseRecaptcha.js";
 import loginUseJWT from "./routers/loginUseJWT.js";
 import renewToken from "./routers/renewToken.js";
+import accountLists from "./routers/accountLists.js";
 
 // config
 dotenv.config();
@@ -46,6 +47,7 @@ app.use("/api/history", history);
 app.use("/api/login-recaptcha", authRecaptcha);
 app.use("/api/login-use-jwt", loginUseJWT);
 app.use("/api/renew-token", renewToken);
+app.use("/api/v2/account-lists", accountLists);
 
 app.get("/", (req, res) => {
     res.json("hello, i am api banking");

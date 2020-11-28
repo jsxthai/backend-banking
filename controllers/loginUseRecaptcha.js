@@ -42,28 +42,23 @@ const authRecaptcha = async (req, res) => {
                         accountNumber: user.accountNumber,
                         username: user.username,
                         email: user.email,
+                        fullname: user.fullname,
                         role: user.role,
                     };
                     const accessToken = createAccessToken(payload); // create jwt use in 10 min
                     const refreshToken = createRefreshToken(payload);
 
+                    // console.log(accessToken);
+                    // console.log(refreshToken);
                     //
                     res.cookie("refreshToken", refreshToken, {
                         maxAge: 24 * 60 * 60 * 1000, //24 h, -> re login every day, or logout -> re login
                         httpOnly: true,
                     });
-                    res.cookie("accessToken", accessToken, {
-                        maxAge: 24 * 60 * 60 * 1000, // cookie max age 24 h, (jwt expiresIn: 10 min), -> 10 min renew jwt
-                    });
+
                     return res.json({
                         msg: "login success",
                         accessToken,
-                        role: user.role,
-                        fullname: user.fullname,
-                        email: user.email,
-                        // role đặt ở đây bên client ko cần decode payload để lấy,
-                        // nên đặt trong payload(token) vì sau đăng nhập sẽ dùng token để request data,
-                        // check role trong đó luôn
                     });
                 }
                 return res.status(401).json({ msg: "password incorrect" });

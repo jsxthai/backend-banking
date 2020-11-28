@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const createAccessToken = async (payload) => {
+const createAccessToken = (payload) => {
     const options = {
         expiresIn: "1h",
         issuer: "Thai Thai das7yh",
@@ -11,7 +11,7 @@ const createAccessToken = async (payload) => {
         console.log("private key is null, exit");
         return;
     }
-    const token = await jwt.sign(payload, privateKey, options);
+    const token = jwt.sign(payload, privateKey, options);
     if (token) {
         return token;
     } else {
