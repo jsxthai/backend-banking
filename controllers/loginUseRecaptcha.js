@@ -2,6 +2,7 @@ import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import { validateHuman } from "../helpers/validateRecaptcha.js";
 import { createAccessToken } from "../helpers/createAccessToken.js";
+import { createRefreshToken } from "../helpers/createRefreshToken.js";
 
 const authRecaptcha = async (req, res) => {
     // console.log("payload", req.payload);
@@ -43,11 +44,24 @@ const authRecaptcha = async (req, res) => {
                         email: user.email,
                         role: user.role,
                     };
-                    const accessToken = createAccessToken(payload);
+                    const accessToken = createAccessToken(payload); // create jwt use in 10 min
+                    const refreshToken = createRefreshToken(payload);
+
+                    //
+                    res.cookie("refreshToken", refreshToken, {
+                        maxAge: 24 * 60 * 60 * 1000, //24 h, -> re login every day, or logout -> re login
+                        httpOnly: true,
+                    });
+                    res.cookie("accessToken", accessToken, {
+                        maxAge: 24 * 60 * 60 * 1000, // cookie max age 24 h, (jwt expiresIn: 10 min), -> 10 min renew jwt
+                    });
                     return res.json({
                         msg: "login success",
                         accessToken,
-                        role: user.role, // role đặt ở đây bên client ko cần decode payload để lấy,
+                        role: user.role,
+                        fullname: user.fullname,
+                        email: user.email,
+                        // role đặt ở đây bên client ko cần decode payload để lấy,
                         // nên đặt trong payload(token) vì sau đăng nhập sẽ dùng token để request data,
                         // check role trong đó luôn
                     });

@@ -12,6 +12,7 @@ import payins from "./routers/payins.js";
 import history from "./routers/historyTrans.js";
 import authRecaptcha from "./routers/loginUseRecaptcha.js";
 import loginUseJWT from "./routers/loginUseJWT.js";
+import renewToken from "./routers/renewToken.js";
 
 // config
 dotenv.config();
@@ -23,6 +24,8 @@ const port = process.env.PORT || 7777;
 
 // app use
 // app.use(cors()); // or line below
+// credentials: true - Để bật cookie HTTP qua CORS
+// origin: "http://localhost:3000" - Chan tat ca cac domain khac ngoai domain nay
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -42,6 +45,7 @@ app.use("/api/payins", payins);
 app.use("/api/history", history);
 app.use("/api/login-recaptcha", authRecaptcha);
 app.use("/api/login-use-jwt", loginUseJWT);
+app.use("/api/renew-token", renewToken);
 
 app.get("/", (req, res) => {
     res.json("hello, i am api banking");
