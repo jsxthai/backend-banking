@@ -1,3 +1,38 @@
 
 GET http://localhost:7777/api/v2/account-lists/1606135606732
 
+
+###
+GET http://localhost:7777/api/v2/account-lists/1606135606732
+
+
+###
+GET http://localhost:7777/api/v2/recipient-lists/1606135606732
+
+###
+POST http://localhost:7777/api/v2/recipient-lists/1606135606732 
+content-type: application/json
+
+{
+    "number": "6546446465464",
+    "name": "thaiia"
+}
+
+###
+
+DELETE http://localhost:7777/api/v2/recipient-lists/1606135606732 
+content-type: application/json
+
+{
+    "number": "6546446465464",
+    "name": "thaiia"
+}
+###
+
+PUT http://localhost:7777/api/v2/recipient-lists/1606135606732 
+content-type: application/json
+
+{
+    "number": "2222222222",
+    "name": "22222222222222222222"
+}

@@ -16,6 +16,12 @@ const userSchema = mongoose.Schema({
             mount: Number,
         },
     ],
+    recipient: [
+        {
+            number: String,
+            name: String,
+        },
+    ],
     createAt: String,
     role: { type: String, default: "user" },
     balance: Number,
