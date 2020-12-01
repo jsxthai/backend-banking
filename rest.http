@@ -36,3 +36,20 @@ content-type: application/json
     "number": "2222222222",
     "name": "kim kim"
 }
+
+
+###
+# checking account
+GET http://localhost:7777/api/accounts/1606135606732 
+
+###
+# chuyển tiền
+POST http://localhost:7777/api/v2/internal-transfer/1606135606732/1606142545882?typeTrans=transfer
+content-type: application/json
+
+{
+    "mount": 1111,
+    "detail": "chuyen tien",
+    "sign": "djasdnaskdasj",
+    "date": 8498434
+}

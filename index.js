@@ -15,6 +15,7 @@ import loginUseJWT from "./routers/loginUseJWT.js";
 import renewToken from "./routers/renewToken.js";
 import accountLists from "./routers/accountLists.js";
 import recipientLists from "./routers/recipientLists.js";
+import internalTransfer from "./routers/internalTransfer.js";
 
 // config
 dotenv.config();
@@ -52,6 +53,7 @@ app.use("/api/login-use-jwt", loginUseJWT);
 app.use("/api/renew-token", renewToken);
 app.use("/api/v2/account-lists", accountLists);
 app.use("/api/v2/recipient-lists", recipientLists);
+app.use("/api/v2/internal-transfer", internalTransfer);
 
 app.get("/", (req, res) => {
     res.json("hello, i am api banking");
