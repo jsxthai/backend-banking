@@ -48,7 +48,7 @@ POST http://localhost:7777/api/v2/internal-transfer/1606135606732/1606142545882?
 content-type: application/json
 
 {
-    "mount": 1111,
+    "mount": 20000,
     "detail": "chuyen tien",
     "sign": "djasdnaskdasj",
     "date": 8498434

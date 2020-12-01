@@ -1,4 +1,5 @@
 import express from "express";
+import { saveTransaction } from "../helpers/saveTransaction.js";
 import { updateBalanceUser } from "../helpers/updateBalanceUser.js";
 import { validateAccount } from "../helpers/validateAccount.js";
 import User from "../models/user.js";
@@ -38,13 +39,35 @@ route.post("/:accountSource/:accountDest", async (req, res) => {
     }
 
     try {
+        // check số tiền thỏa giao dịch: sau khi trừ tiền số dư phải lớn hơn 0
+        // số tiền giao dịch hợp lệ ....
+        //  sau dó update
+        // if(checkMountMoney) // upd
+        // case: tín dụng cho phép số âm (nợ), khỏi check @@
+
+        // upd balance 2 user
         const isUpdBalanceSource = await updateBalanceUser(
             accountSource,
             -mount
         );
         const isUpdBalanceDest = await updateBalanceUser(accountDest, mount);
-        console.log(isUpdBalanceSource);
-        console.log(isUpdBalanceDest);
+        // if 1 trong 2 thất bại phải roll back
+        // update lại
+        // console.log(isUpdBalanceSource);
+        // console.log(isUpdBalanceDest);
+
+        // case true and true // 2 giao dịch thành lông
+        // save log transaction
+        const isSaveTrans = await saveTransaction(
+            accountSource,
+            accountDest,
+            mount,
+            detail,
+            sign,
+            date,
+            typeTrans
+        );
+        // console.log("isT", isSaveTrans);
     } catch (error) {
         console.log("err interal transfer", error);
     }
