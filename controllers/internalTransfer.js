@@ -2,7 +2,6 @@ import { saveTransaction } from "../helpers/saveTransaction.js";
 import { updateBalanceUser } from "../helpers/updateBalanceUser.js";
 import { validateAccount } from "../helpers/validateAccount.js";
 
-// post  api/internal-transfer/89999999999/
 // body
 // {
 //     "mount": 900000,
@@ -64,7 +63,9 @@ export const internalTransfer = async (req, res) => {
             date,
             typeTrans
         );
-        // console.log("isT", isSaveTrans);
+        if (isUpdBalanceSource && isUpdBalanceDest && isSaveTrans) {
+            res.status(201).json({ msg: "transaction success" });
+        }
     } catch (error) {
         console.log("err interal transfer", error);
     }

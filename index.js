@@ -54,7 +54,6 @@ app.use("/api/renew-token", renewToken);
 app.use("/api/v2/account-lists", accountLists);
 app.use("/api/v2/recipient-lists", recipientLists);
 app.use("/api/v2/internal-transfer", internalTransfer);
-// app.use("/api/v2/send-mail-otp", internalTransfer);
 
 app.get("/", (req, res) => {
     res.json("hello, i am api banking");
