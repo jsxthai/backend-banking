@@ -1,4 +1,5 @@
 import User from "../models/user.js";
+import { validateAccount } from "../helpers/validateAccount.js";
 
 export const getRecipient = async (req, res) => {
     const { accountNumber } = req.params;
@@ -24,6 +25,7 @@ export const getRecipient = async (req, res) => {
         return res.status(400).json({ msg: " account number invalid", error });
     }
 };
+
 export const createRecipient = async (req, res) => {
     const { accountNumber } = req.params;
     if (!accountNumber) {
@@ -33,6 +35,14 @@ export const createRecipient = async (req, res) => {
     if (!number || !name) {
         return res.status(400).json({ msg: "params incorrect" });
     }
+
+    const isNumber = await validateAccount(number);
+    // console.log("is", isNumber);
+
+    if (!isNumber) {
+        return res.status(400).json({ msg: "account recipient not found" });
+    }
+
     try {
         // find => save
         User.findOne({ accountNumber }, { password: 0 }, (err, user) => {
@@ -89,7 +99,7 @@ export const deleteRecipient = async (req, res) => {
         return res.status(400).json({ msg: "no account number" });
     }
     const { number, name } = req.query;
-    console.log("sssssss", req.query);
+    // console.log("sssssss", req.query);
     if (!number || !name) {
         return res.status(400).json({ msg: "params incorrect" });
     }
@@ -143,7 +153,7 @@ export const updRecipient = async (req, res) => {
     if (!accountNumber) {
         return res.status(400).json({ msg: "no account number" });
     }
-    console.log("aaaa", req.body);
+    // console.log("aaaa", req.body);
     const { number, name } = req.body;
     if (!number || !name) {
         return res.status(400).json({ msg: "params incorrect" });
@@ -182,7 +192,7 @@ export const updRecipient = async (req, res) => {
                             err,
                         });
                     }
-                    console.log(result);
+                    // console.log(result);
                     return res.json({ msg: "update success", result });
                 }
             );
