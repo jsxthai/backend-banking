@@ -31,7 +31,8 @@ const port = process.env.PORT || 7777;
 // origin: "http://localhost:3000" - Chan tat ca cac domain khac ngoai domain nay
 // Access-Control-Allow-Origin: client-url
 // Access-Control-Allow-Credentials: true
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+const originClient = process.env.URL_ORIGIN_CLIENT || "http://localhost:3000";
+app.use(cors({ credentials: true, origin: originClient }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
