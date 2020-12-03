@@ -53,3 +53,6 @@ content-type: application/json
     "sign": "djasdnaskdasj",
     "date": 8498434
 }
+
+###
+GET http://localhost:7777/api/history/1606135606732
