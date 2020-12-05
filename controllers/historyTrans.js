@@ -7,8 +7,8 @@ export const historyTrans = async (req, res) => {
     let { limit, page, typeTrans } = req.query;
     limit = parseInt(limit) || 10;
     page = page | 0;
-    console.log("limit: ", limit, "page: ", page);
-    console.log("type trans ", typeTrans);
+    // console.log("limit: ", limit, "page: ", page);
+    // console.log("type trans ", typeTrans);
 
     // console.log("length", lengthModel);
 
@@ -28,8 +28,8 @@ export const historyTrans = async (req, res) => {
     // làm chung, tiện cho client, server mỗi lần phải get length lại
     // get lại đảm bảo length luôn được cập nhật mới
     const lengthModel = await getLengthModel(Trans, filter);
-    console.log("leng", lengthModel);
-    if (!lengthModel) {
+    // console.log("leng", lengthModel);
+    if (lengthModel === false) {
         return res
             .status(400)
             .json({ msg: "Server get total lenght of model err" });

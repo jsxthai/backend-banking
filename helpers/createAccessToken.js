@@ -14,7 +14,7 @@ const createAccessToken = (payload) => {
         return;
     }
     const token = jwt.sign(payload, privateKey, options);
-    console.log("token  ssssssssss", token);
+    // console.log("token  ssssssssss", token);
     if (token) {
         return token;
     } else {
