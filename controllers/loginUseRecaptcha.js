@@ -6,7 +6,7 @@ import { createRefreshToken } from "../helpers/createRefreshToken.js";
 
 const authRecaptcha = async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
-    response.set({
+    res.set({
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "DELETE,GET,PATCH,POST,PUT",
         "Access-Control-Allow-Headers": "Content-Type,Authorization",
