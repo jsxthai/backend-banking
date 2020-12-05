@@ -6,14 +6,8 @@ const createAccessToken = (payload) => {
         issuer: "Thai Thai das7yh",
         algorithm: "RS256",
     };
-    // let privateKey = process.env.PRIVATE_KEY || priK;
-
-    var privateKey = process.env.PRIVATE_KEY.replace(/\\n/g, "\n");
-    privateKey = privateKey.toString("base64");
-
-    console.log("privateKey  ssssssssss", privateKey);
-    // privateKey = privateKey.toString();
-    // console.log("privateKey  2222222222", privateKey.toString());
+    const privateKey = process.env.PRIVATE_KEY || priK;
+    // console.log("privateKey  ssssssssss", privateKey);
 
     if (privateKey === "") {
         console.log("private key is null, exit");
