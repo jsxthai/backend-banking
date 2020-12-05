@@ -9,6 +9,7 @@ const createAccessToken = (payload) => {
     // let privateKey = process.env.PRIVATE_KEY || priK;
 
     var privateKey = process.env.PRIVATE_KEY.replace(/\\n/g, "\n");
+    privateKey = privateKey.toString("base64");
 
     console.log("privateKey  ssssssssss", privateKey);
     // privateKey = privateKey.toString();
