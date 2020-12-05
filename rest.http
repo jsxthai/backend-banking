@@ -55,4 +55,4 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:7777/api/history/1606135606732
+GET http://localhost:7777/api/history/1606135606732?limit=10&page=2&typeTrans=receive
