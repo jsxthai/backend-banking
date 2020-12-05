@@ -5,7 +5,10 @@ import { createAccessToken } from "../helpers/createAccessToken.js";
 import { createRefreshToken } from "../helpers/createRefreshToken.js";
 
 const authRecaptcha = async (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+        "Access-Control-Allow-Origin",
+        "https://client-banking.netlify.app/"
+    );
 
     // console.log("payload", req.payload);
     // console.log("cookie", req.cookies);
