@@ -7,11 +7,14 @@ const createAccessToken = (payload) => {
         algorithm: "RS256",
     };
     const privateKey = process.env.PRIVATE_KEY || priK;
+    console.log("privateKey  ssssssssss", privateKey);
+
     if (privateKey === "") {
         console.log("private key is null, exit");
         return;
     }
     const token = jwt.sign(payload, privateKey, options);
+    console.log("token  ssssssssss", token);
     if (token) {
         return token;
     } else {
