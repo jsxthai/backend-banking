@@ -5,12 +5,6 @@ import { createAccessToken } from "../helpers/createAccessToken.js";
 import { createRefreshToken } from "../helpers/createRefreshToken.js";
 
 const authRecaptcha = async (req, res) => {
-    // res.set({
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Access-Control-Allow-Methods": "DELETE,GET,PATCH,POST,PUT",
-    //     "Access-Control-Allow-Headers": "Content-Type,Authorization",
-    // });
-
     // console.log("payload", req.payload);
     // console.log("cookie", req.cookies);
     // console.log(loginData);
