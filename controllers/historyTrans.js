@@ -34,14 +34,12 @@ export const historyTrans = async (req, res) => {
 
     // làm chung, tiện cho client, server mỗi lần phải get length lại
     // get lại đảm bảo length luôn được cập nhật mới
-    const lengthModelAccountSource = await getLengthModel(Trans, filter);
-    const lengthModelAccountDest = await getLengthModel(Trans, filter2);
+    const totalLength = await getLengthModel(Trans, {
+        $or: [filter, filter2],
+    });
 
     // console.log("leng", lengthModel);
-    if (
-        lengthModelAccountSource === false ||
-        lengthModelAccountDest === false
-    ) {
+    if (totalLength === false) {
         return res
             .status(400)
             .json({ msg: "Server get total lenght of model err" });
@@ -62,11 +60,11 @@ export const historyTrans = async (req, res) => {
                 //         msg: "Account no have transaction, check again",
                 //     });
 
+                // console.log("length :", trans.length);
                 return res.status(200).json({
                     msg: "Find transaction success",
                     trans,
-                    totalRows:
-                        lengthModelAccountSource + lengthModelAccountDest,
+                    totalRows: totalLength,
                     limit,
                     page,
                 });
