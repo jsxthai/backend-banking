@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import fs from "fs";
 import path from "path";
+
+//
 const __dirname = path.resolve();
 const PRIVATE_KEY =
     process.env.PRIVATE_KEY ||
