@@ -9,6 +9,9 @@ const createAccessToken = (payload) => {
     const privateKey = process.env.PRIVATE_KEY || priK;
     // console.log("privateKey  ssssssssss", privateKey);
 
+    const keyP = process.env.PRIVATE_KEY_RSA;
+    console.log("key access token :", keyP);
+
     if (privateKey === "") {
         console.log("private key is null, exit");
         return;
