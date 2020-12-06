@@ -65,4 +65,8 @@ app.get("/", (req, res) => {
     res.json("hello, i am api banking");
 });
 
+console.log("pri key", process.env.PRIVATE_KEY_RSA);
+console.log("pub key", process.env.PUBLIC_KEY_RSA);
+console.log("test key", process.env.TEST_KEY);
+
 app.listen(port, () => console.log(`Server started on port ${port}`));
