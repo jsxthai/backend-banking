@@ -2,7 +2,7 @@ import axios from "axios";
 
 // func validate with gg recaptcha
 const validateHuman = async (token) => {
-    const secret = process.env.RECAPTCHA_SECRET_KEY || "6LcxqugZAAAAAGVIXI5Zx_";
+    const secret = process.env.RECAPTCHA_SECRET_KEY;
     const response = token;
 
     // pass parameter

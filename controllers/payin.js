@@ -1,17 +1,19 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 import Transaction from "../models/transaction.js";
-import fs from "fs";
-import path from "path";
-const __dirname = path.resolve();
+// import fs from "fs";
+// import path from "path";
+// const __dirname = path.resolve();
 
-///
-const PUBLIC_KEY =
-    process.env.PUBLIC_KEY ||
-    fs.readFileSync(
-        path.resolve(__dirname, "backend-banking", "../key/publicKey.pem"),
-        "utf-8"
-    );
+// ///
+// const PUBLIC_KEY =
+//     process.env.PUBLIC_KEY ||
+//     fs.readFileSync(
+//         path.resolve(__dirname, "backend-banking", "../key/publicKey.pem"),
+//         "utf-8"
+//     );
+
+const publicKeyRSA = process.env.PUBLIC_KEY_RSA;
 
 export const payin = (req, res) => {
     const jwtToken = req.headers.authorization.split(" ")[1];
@@ -24,7 +26,7 @@ export const payin = (req, res) => {
     // .....later
 
     // validate token = publicKey
-    jwt.verify(jwtToken, PUBLIC_KEY, (err, payload) => {
+    jwt.verify(jwtToken, publicKeyRSA, (err, payload) => {
         if (err) return res.status(401).json({ msg: "sign khong hop le" });
         else {
             // find user with payload.accountNumber
