@@ -2,10 +2,15 @@ import jwt from "jsonwebtoken";
 const { TokenExpiredError } = jwt;
 
 const validateAccessToken = (req, res, next) => {
-    const { accessToken } = req.cookies;
-    console.log("cookie", accessToken);
-    console.log("cookie req", req.cookies);
-    console.log("cookie body", req.body);
+    // const { accessToken } = req.cookies; // khong nhân dược
+    // console.log("cookie", accessToken);
+    // console.log("cookie req", req.cookies);
+    // console.log("cookie body", req.body);
+    // console.log('header', req.header)
+
+    // chuyen qua read token in body;
+    const { accessToken } = req.body;
+    console.log("token", accessToken);
 
     if (!accessToken) {
         return res.status(401).json({ msg: "not found access token" });
