@@ -5,6 +5,8 @@ const { TokenExpiredError } = jwt;
 const validateAccessToken = (req, res, next) => {
     const { accessToken } = req.cookies;
     console.log("cookie", accessToken);
+    console.log("cookie", req.cookies);
+
     if (!accessToken) {
         return res.status(401).json({ msg: "not found access token" });
     }
