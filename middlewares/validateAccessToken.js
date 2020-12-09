@@ -8,7 +8,7 @@ const validateAccessToken = (req, res, next) => {
     }
 
     // console.log("acc:", accessToken);
-    const publicKey = process.env.PUBLIC_KEY;
+    const publicKey = process.env.PUBLIC_KEY_RSA;
     console.log("pub key", publicKey);
     if (!publicKey) {
         console.log("public key is null");
