@@ -10,7 +10,7 @@ const validateAccessToken = (req, res, next) => {
 
     // chuyen qua read token in body;
     const { accessToken } = req.body;
-    console.log("token", accessToken);
+    // console.log("token", accessToken);
 
     if (!accessToken) {
         return res.status(401).json({ msg: "not found access token" });
@@ -18,7 +18,7 @@ const validateAccessToken = (req, res, next) => {
 
     // console.log("acc:", accessToken);
     const publicKey = process.env.PUBLIC_KEY_RSA;
-    console.log("pub key", publicKey);
+    // console.log("pub key", publicKey);
     if (!publicKey) {
         console.log("public key is null");
         return res.status(401).json({ msg: "server not auth now" });
