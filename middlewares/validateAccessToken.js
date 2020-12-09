@@ -8,7 +8,8 @@ const validateAccessToken = (req, res, next) => {
     }
 
     // console.log("acc:", accessToken);
-    const publicKey = process.env.PUBLIC_KEY || pK;
+    const publicKey = process.env.PUBLIC_KEY;
+    console.log("pub key", publicKey);
     if (!publicKey) {
         console.log("public key is null");
         return res.status(401).json({ msg: "server not auth now" });
@@ -24,6 +25,7 @@ const validateAccessToken = (req, res, next) => {
                 console.log("token is exprired");
                 return res.status(401).json({ msg: "token is exprired", err });
             }
+            console.log("err verify", err);
             return res
                 .status(401)
                 .json({ msg: "server not verify token", err });
@@ -33,12 +35,5 @@ const validateAccessToken = (req, res, next) => {
         next();
     });
 };
-
-const pK = `-----BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+nA6hvZWZzxp8G9IYOd7Rn44i
-jGk1k8rJnL/hdFo63R7yf6Tf62j/p2rA/4x2nVTQaiNPvZYHdZkq3SR0dNW5E11/
-TNR4jEUr6TyPScP88v8m+YPls3g+eS6f1uW2iENrWNuDWJOJM4YonMOGEm8MCWZD
-9hVXvtXEr7TdWfW26QIDAQAB
------END PUBLIC KEY-----`;
 
 export { validateAccessToken };
