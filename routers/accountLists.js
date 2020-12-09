@@ -1,9 +1,8 @@
 import express from "express";
 import User from "../models/user.js";
-import { validateAccessToken } from "../middlewares/validateAccessToken.js";
 
 const route = express.Router();
-route.get("/:accountNumber", validateAccessToken, (req, res) => {
+route.get("/:accountNumber", (req, res) => {
     const { accountNumber } = req.params;
     console.log("acc:", accountNumber);
     User.findOne(
