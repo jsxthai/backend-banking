@@ -3,7 +3,7 @@ const loginUseToken = (req, res) => {
     // console.log("pl", payload);
     const accessToken = req.cookies.accessToken;
 
-    // console.log("all cookie: ", req.cookies);
+    console.log("all cookie: ", req.cookies);
 
     return res.json({
         msg: "login success",
