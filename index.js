@@ -35,7 +35,7 @@ const port = process.env.PORT || 7777;
 const originClient = [
     "https://client-banking.netlify.app",
     "https://admin-banking.netlify.app",
-    "http://localhost:3000",
+    // "http://localhost:3000",
 ];
 app.use(cors({ credentials: true, origin: originClient }));
 app.use(express.json());
@@ -64,12 +64,5 @@ app.use("/api/v2/internal-transfer", internalTransfer);
 app.get("/", (req, res) => {
     res.json("hello, i am api banking");
 });
-
-// test set env multiline in heroku
-// console.log("pri key", process.env.PRIVATE_KEY_RSA);
-// console.log("pub key", process.env.PUBLIC_KEY_RSA);
-// console.log("test key", process.env.TEST_KEY);
-// const keyP = process.env.PRIVATE_KEY_RSA;
-// console.log("key PPPPPPPP:", keyP);
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
