@@ -57,7 +57,7 @@ const authRecaptcha = async (req, res) => {
                     });
                     res.cookie("accessToken", accessToken, {
                         maxAge: 1 * 60 * 60 * 1000,
-                        // httpOnly: true,
+                        httpOnly: true,
                     });
                     return res.json({
                         msg: "login success",
