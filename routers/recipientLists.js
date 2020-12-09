@@ -6,16 +6,15 @@ import {
     updRecipient,
     getRecipient,
 } from "../controllers/recipientLists.js";
-import { validateAccessToken } from "../middlewares/validateAccessToken.js";
 
 const route = express.Router();
 
-route.get("/:accountNumber", validateAccessToken, getRecipient);
+route.get("/:accountNumber", getRecipient);
 
-route.post("/:accountNumber", validateAccessToken, createRecipient);
+route.post("/:accountNumber", createRecipient);
 
-route.delete("/:accountNumber", validateAccessToken, deleteRecipient);
+route.delete("/:accountNumber", deleteRecipient);
 
-route.put("/:accountNumber", validateAccessToken, updRecipient);
+route.put("/:accountNumber", updRecipient);
 
 export default route;
