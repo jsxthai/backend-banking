@@ -1,11 +1,11 @@
-import { access } from "fs";
 import jwt from "jsonwebtoken";
 const { TokenExpiredError } = jwt;
 
 const validateAccessToken = (req, res, next) => {
     const { accessToken } = req.cookies;
     console.log("cookie", accessToken);
-    console.log("cookie", req.cookies);
+    console.log("cookie req", req.cookies);
+    console.log("cookie body", req.body);
 
     if (!accessToken) {
         return res.status(401).json({ msg: "not found access token" });
