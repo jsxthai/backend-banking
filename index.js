@@ -38,7 +38,10 @@ const originClient = [
     "https://admin-banking.netlify.app",
     // "http://localhost:3000",
 ];
-app.use(cors({ credentials: true, origin: originClient }));
+// app.use(cors({ credentials: true, origin: originClient }));
+app.use(
+    cors({ credentials: true, origin: "https://client-banking.netlify.app" })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
