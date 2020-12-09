@@ -10,12 +10,12 @@ import { validateAccessToken } from "../middlewares/validateAccessToken.js";
 
 const route = express.Router();
 
-route.get("/:accountNumber", getRecipient);
+route.get("/:accountNumber", validateAccessToken, getRecipient);
 
-route.post("/:accountNumber", createRecipient);
+route.post("/:accountNumber", validateAccessToken, createRecipient);
 
-route.delete("/:accountNumber", deleteRecipient);
+route.delete("/:accountNumber", validateAccessToken, deleteRecipient);
 
-route.put("/:accountNumber", updRecipient);
+route.put("/:accountNumber", validateAccessToken, updRecipient);
 
 export default route;

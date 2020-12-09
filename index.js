@@ -30,7 +30,7 @@ const port = process.env.PORT || 7777;
 // credentials: true - Để bật cookie HTTP qua CORS
 // origin: "http://localhost:3000" - Chan tat ca cac domain khac ngoai domain nay
 // Access-Control-Allow-Origin: client-url
-// Access-Control-Allow-Credentials: true
+// Access-Control-Allow-Credentials: true  ||  credentials: true, sử dung cookie
 // const originClient = process.env.URL_ORIGIN_CLIENT || "http://localhost:3000";
 const originClient = [
     "https://client-banking.netlify.app",
