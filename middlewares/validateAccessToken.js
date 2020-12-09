@@ -41,6 +41,7 @@ const validateAccessToken = (req, res, next) => {
         }
         // is payload
         req.payload = payload;
+        req.token = accessToken;
         next();
     });
 };
