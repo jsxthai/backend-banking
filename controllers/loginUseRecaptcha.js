@@ -55,7 +55,10 @@ const authRecaptcha = async (req, res) => {
                         maxAge: 24 * 60 * 60 * 1000, //24 h, -> re login every day, or logout -> re login
                         httpOnly: true,
                     });
-
+                    res.cookie("accessToken", accessToken, {
+                        maxAge: 1 * 60 * 60 * 1000,
+                        // httpOnly: true,
+                    });
                     return res.json({
                         msg: "login success",
                         accessToken,
