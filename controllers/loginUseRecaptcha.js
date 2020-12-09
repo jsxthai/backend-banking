@@ -48,8 +48,8 @@ const authRecaptcha = async (req, res) => {
                     const accessToken = createAccessToken(payload); // create jwt use in 10 min
                     const refreshToken = createRefreshToken(payload);
 
-                    // console.log(accessToken);
-                    // console.log(refreshToken);
+                    console.log("acc", accessToken);
+                    console.log("ref", refreshToken);
                     //
                     res.cookie("refreshToken", refreshToken, {
                         maxAge: 24 * 60 * 60 * 1000, //24 h, -> re login every day, or logout -> re login
