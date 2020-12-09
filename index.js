@@ -32,6 +32,7 @@ const port = process.env.PORT || 7777;
 // Access-Control-Allow-Origin: client-url
 // Access-Control-Allow-Credentials: true  ||  credentials: true, sử dung cookie
 // const originClient = process.env.URL_ORIGIN_CLIENT || "http://localhost:3000";
+app.use(cookieParser());
 const originClient = [
     "https://client-banking.netlify.app",
     "https://admin-banking.netlify.app",
@@ -40,7 +41,6 @@ const originClient = [
 app.use(cors({ credentials: true, origin: originClient }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 // logging
 if (process.env.NODE_ENV === "development") {
