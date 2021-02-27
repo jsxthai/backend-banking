@@ -32,12 +32,9 @@ const port = process.env.PORT || 7777;
 // Access-Control-Allow-Origin: client-url
 // Access-Control-Allow-Credentials: true  ||  credentials: true, sử dung cookie
 // const originClient = process.env.URL_ORIGIN_CLIENT || "http://localhost:3000";
+const envOriginClient = process.env.URL_ORIGIN_CLIENT;
 app.use(cookieParser());
-const originClient = [
-    "https://client-banking.netlify.app",
-    "https://admin-banking.netlify.app",
-    // "http://localhost:3000",
-];
+const originClient = ["https://admin-banking.netlify.app", envOriginClient];
 app.use(cors({ credentials: true, origin: originClient }));
 
 app.use(express.json());
@@ -45,7 +42,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // logging
 if (process.env.NODE_ENV === "development") {
-    app.use(morgan("dev"));
+  app.use(morgan("dev"));
 }
 
 // use router
@@ -63,7 +60,7 @@ app.use("/api/v2/recipient-lists", recipientLists);
 app.use("/api/v2/internal-transfer", internalTransfer);
 
 app.get("/", (req, res) => {
-    res.json("hello, i am api banking");
+  res.json("hello, i am api banking");
 });
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
